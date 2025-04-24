@@ -54,9 +54,27 @@ export async function createUser(userid, password, name, email) {
   return users;
 }
 
-export async function login(userid, password) {
+export async function login(req, res, next) {
+  console.log("req.body 확인:", req.body); // 🔍 JSON 데이터가 올바르게 전달되는지 확인
+
+  if (!req.body || !req.body.userid || !req.body.password) {
+    return res.status(400).json({ message: "아이디와 비밀번호를 입력하세요." });
+  }
+
+  const { userid, password } = req.body;
+
   const user = users.find(
     (user) => user.userid === userid && user.password === password
   );
-  return user;
+
+  if (user) {
+    req.session.user = { userid: user.userid, name: user.name };
+
+    res.status(200).json({
+      message: `${userid}님 로그인 완료!`,
+      user: req.session.user,
+    });
+  } else {
+    res.status(404).json({ message: "아이디 또는 비밀번호를 확인하세요." });
+  }
 }
