@@ -41,37 +41,16 @@ let users = [
   },
 ];
 
-export async function createUser(userid, password, name, email) {
-  const user = {
-    id: Date.now().toString(),
-    userid,
-    password,
-    name,
-    email,
-    url: "https://randomuser.me/api/portraits/men/29.jpg",
-  };
-
-  users = [...users, user]; // 기존 배열을 변경하지 않도록 개선
-
-  return user; // 새로 생성된 사용자 객체 반환
-}
-
 export async function login(userid, password) {
-  try {
-    console.log(" authRepository에서 로그인 요청:", userid, password);
+  console.log("로그인 요청:", userid, password);
+  console.log("현재 users 배열:", users);
 
-    const user = users.find(
-      (user) => user.userid === userid && user.password === password
-    );
+  const user = users.find(
+    (user) => user.userid === userid && user.password === password
+  );
 
-    if (!user) {
-      console.error(" 사용자를 찾을 수 없음:", userid);
-      return null; // res.status를 여기서 사용하지 않고 null 반환
-    }
+  console.log("검색 조건:", userid, password);
+  console.log("찾은 user:", user);
 
-    return user; // 로그인 성공 시 사용자 객체 반환
-  } catch (error) {
-    console.error(" 로그인 중 오류 발생:", error);
-    throw new Error("서버 내부 오류 발생"); // 오류 발생 시 throw로 예외 전달
-  }
+  return user || null;
 }
