@@ -50,31 +50,28 @@ export async function createUser(userid, password, name, email) {
     email,
     url: "https://randomuser.me/api/portraits/men/29.jpg",
   };
-  users = [user, ...users];
-  return users;
+
+  users = [...users, user]; // 기존 배열을 변경하지 않도록 개선
+
+  return user; // 새로 생성된 사용자 객체 반환
 }
 
-export async function login(req, res, next) {
-  console.log("req.body 확인:", req.body); // 🔍 JSON 데이터가 올바르게 전달되는지 확인
+export async function login(userid, password) {
+  try {
+    console.log(" authRepository에서 로그인 요청:", userid, password);
 
-  if (!req.body || !req.body.userid || !req.body.password) {
-    return res.status(400).json({ message: "아이디와 비밀번호를 입력하세요." });
-  }
+    const user = users.find(
+      (user) => user.userid === userid && user.password === password
+    );
 
-  const { userid, password } = req.body;
+    if (!user) {
+      console.error(" 사용자를 찾을 수 없음:", userid);
+      return null; // res.status를 여기서 사용하지 않고 null 반환
+    }
 
-  const user = users.find(
-    (user) => user.userid === userid && user.password === password
-  );
-
-  if (user) {
-    req.session.user = { userid: user.userid, name: user.name };
-
-    res.status(200).json({
-      message: `${userid}님 로그인 완료!`,
-      user: req.session.user,
-    });
-  } else {
-    res.status(404).json({ message: "아이디 또는 비밀번호를 확인하세요." });
+    return user; // 로그인 성공 시 사용자 객체 반환
+  } catch (error) {
+    console.error(" 로그인 중 오류 발생:", error);
+    throw new Error("서버 내부 오류 발생"); // 오류 발생 시 throw로 예외 전달
   }
 }
