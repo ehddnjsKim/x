@@ -41,14 +41,22 @@ let users = [
   },
 ];
 
-export async function NewId(id, userid, userpw, name, email) {
+export async function createUser(userid, password, name, email) {
   const user = {
     id: Date.now().toString(),
     userid,
-    userpw,
+    password,
     name,
-    emial,
+    email,
+    url: "https://randomuser.me/api/portraits/men/29.jpg",
   };
-  users.push(user);
+  users = [user, ...users];
+  return users;
+}
+
+export async function login(userid, password) {
+  const user = users.find(
+    (user) => user.userid === userid && user.password === password
+  );
   return user;
 }
