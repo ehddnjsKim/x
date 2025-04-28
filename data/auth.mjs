@@ -52,7 +52,6 @@ export async function createUser(userid, password, name, email) {
   };
 
   users = [...users, user]; // 기존 배열을 변경하지 않도록 개선
-
   return user; // 새로 생성된 사용자 객체 반환
 }
 
@@ -74,4 +73,12 @@ export async function login(userid, password) {
     console.error(" 로그인 중 오류 발생:", error);
     throw new Error("서버 내부 오류 발생"); // 오류 발생 시 throw로 예외 전달
   }
+}
+
+export async function findByUserid(userid) {
+  return users.find((user) => user.userid === userid);
+}
+
+export async function findByid(id) {
+  return users.find((user) => user.id === id);
 }
