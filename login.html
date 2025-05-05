@@ -2,27 +2,30 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
-      <h2>로그인</h2>
-      <form id="login-form">
-        <div>
-          <label for="userid">아이디</label>
-          <input type="text" id="userid" name="userid" required />
-        </div>
-        <div>
-          <label for="password">비밀번호</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <button type="submit">로그인</button>
-      </form>
-      <div id="response-message"></div>
-      <!-- ✅ 서버 응답 메시지 표시 -->
+      <div class="login-container">
+        <h2>로그인</h2>
+        <form id="login-form">
+          <div class="input-group">
+            <label for="userid">아이디</label>
+            <input type="text" id="userid" name="userid" required />
+          </div>
+          <div class="input-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <button type="submit" class="login-button">로그인</button>
+        </form>
+        <div id="response-message"></div>
+        <!-- ✅ 로그인 응답 메시지 -->
+      </div>
     </main>
 
     <script src="login.js"></script>
+    <!-- ✅ 로그인 기능을 처리하는 스크립트 -->
   </body>
 </html>

@@ -25,8 +25,7 @@ document
       if (response.ok) {
         alert("회원가입 성공: " + data.message);
 
-        // ✅ 회원가입 성공 시 로그인 페이지로 이동
-        window.location.href = "login.html";
+        window.location.href = "login.html"; // ✅ 회원가입 후 로그인 페이지로 이동
       } else {
         alert("회원가입 실패: " + data.message);
       }

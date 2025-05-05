@@ -1,0 +1,112 @@
+/* ✅ 전체 페이지 스타일 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* 세로 정렬 */
+  height: 100vh;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+/* ✅ 로그인 컨테이너 */
+.login-container {
+  background-color: white;
+  padding: 20px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* ✅ 입력 필드 스타일 */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* ✅ 로그인 버튼 */
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+/* ✅ 응답 메시지 */
+#response-message {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ✅ 게시글 목록 */
+#postList {
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ 개별 소개글 */
+.post {
+  display: flex; /* 🔥 이미지와 텍스트를 가로로 정렬 */
+  align-items: center; /* 중앙 정렬 */
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+/* ✅ 프로필 사진 스타일 */
+.post img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+/* ✅ 사용자 정보 정렬 */
+.post-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-info p {
+  font-size: 16px;
+  color: #333;
+  margin: 4px 0;
+}
+
+/* ✅ 제목 중앙 정렬 */
+h1 {
+  text-align: center; /* ✅ 가운데 정렬 */
+  font-size: 28px; /* ✅ 제목 크기 조정 */
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-left: 30px;
+}

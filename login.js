@@ -21,19 +21,21 @@ document
       const data = await response.json();
 
       if (response.ok) {
-        alert("로그인 성공: " + data.message);
+        alert("로그인 성공!");
 
-        // ✅ 로그인 성공 시 JWT 토큰 저장
+        // ✅ JWT 토큰 및 사용자 ID 저장
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userid", data.userid);
 
-        // ✅ 서버 응답 메시지를 화면에 표시
-        document.getElementById("response-message").innerText = data.message;
+        console.log("저장된 토큰:", data.token); // ✅ 토큰 확인용 로그 추가
 
-        document.getElementById("login-form").reset();
+        // ✅ 로그인 후 post.html 페이지로 자동 이동
+        window.location.href = "post.html";
       } else {
         alert("로그인 실패: " + data.message);
       }
     } catch (error) {
-      alert("서버 통신 오류: " + error.message);
+      console.error("서버 오류:", error);
+      alert("서버 오류 발생: " + error.message);
     }
   });
