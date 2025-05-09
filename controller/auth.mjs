@@ -7,8 +7,8 @@ const secretKey = config.jwt.secretKey;
 const bcryptSaltRounds = config.bcrypt.saltRounds;
 const jwtExpiresInDays = config.jwt.expiresInSec;
 
-async function createJwtToken(idx) {
-  return jwt.sign({ idx }, secretKey, { expiresIn: jwtExpiresInDays });
+async function createJwtToken(id) {
+  return jwt.sign({ id }, secretKey, { expiresIn: jwtExpiresInDays });
 }
 
 export async function signup(req, res, next) {
@@ -21,7 +21,13 @@ export async function signup(req, res, next) {
   }
 
   const hashed = bcrypt.hashSync(password, bcryptSaltRounds);
-  const users = await authRepository.createUser(userid, hashed, name, email);
+  const users = await authRepository.createUser(
+    userid,
+    hashed,
+    name,
+    email,
+    url
+  );
   const token = await createJwtToken(users.id);
   console.log(token);
   if (users) {

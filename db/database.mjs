@@ -1,11 +1,10 @@
-import mysql from "mysql2";
 import { config } from "../config.mjs";
-import MongoDB from "mongodb";
+import MongoDb from "mongodb";
 
 let db;
 
 export async function connectDB() {
-  return MongoDB.MongoClient.connect(config.db.host).then((client) => {
+  return MongoDb.MongoClient.connect(config.db.host).then((client) => {
     db = client.db();
     // console.log(db);
   });

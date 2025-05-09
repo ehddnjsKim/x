@@ -1,11 +1,12 @@
 import { getPosts } from "../db/database.mjs";
-import MongoDB, { ReturnDocument } from "mongodb";
+import MongoDb, { ReturnDocument } from "mongodb";
 import * as UserRepository from "./auth.mjs";
-const ObjectID = MongoDB.ObjectId;
+import { getPost } from "../controller/post.mjs";
+const ObjectID = MongoDb.ObjectId;
 
 // 모든 포스트를 리턴
 export async function getAll() {
-  return getPosts.find().sort({ createAt: -1 }).toArray();
+  return getPosts().find().sort({ createAt: -1 }).toArray();
 }
 
 // 사용자 아이디(userid)에 대한 포스트를 리턴
