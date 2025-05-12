@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+
 dotenv.config();
 function required(key, defaultValue = undefined) {
   const value = process.env[key] || defaultValue;
@@ -17,5 +18,8 @@ export const config = {
   },
   host: {
     port: parseInt(required("HOST_PORT", 8080)),
+  },
+  db: {
+    host: required("DB_HOST"),
   },
 };

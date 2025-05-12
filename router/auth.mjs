@@ -33,13 +33,4 @@ router.post("/signup", validateSignup, authController.signup);
 // http://127.0.0.1:8080/auth/login
 router.post("/login", validateLogin, authController.login);
 
-// 로그인 유지 (현재 로그인한 사용자 정보 반환)
-router.get("/me", (req, res) => {
-  if (req.session.user) {
-    res.status(200).json({ user: req.session.user });
-  } else {
-    res.status(401).json({ message: "로그인이 필요합니다." });
-  }
-});
-
 export default router;
