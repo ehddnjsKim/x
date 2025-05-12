@@ -36,7 +36,7 @@ export const isAuth = async (req, res, next) => {
       return res.status(401).json(AUTH_ERROR);
     }
     console.log(decoded.idx);
-    const user = await authRepository.findByid(decoded.id);
+    const user = await authRepository.findById(decoded.id);
     if (!user) {
       console.log("아이디 없음");
       return res.status(401).json(AUTH_ERROR);

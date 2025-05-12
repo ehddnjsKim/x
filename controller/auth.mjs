@@ -15,19 +15,19 @@ export async function signup(req, res, next) {
   const { userid, password, name, email, url } = req.body;
 
   // 회원 중복 체크
-  const found = await authRepository.findByUserid(userid);
+  const found = await authRepository.findByUserId(userid);
   if (found) {
     return res.status(409).json({ message: `${userid}이 이미 있습니다.` });
   }
 
   const hashed = bcrypt.hashSync(password, bcryptSaltRounds);
-  const users = await authRepository.createUser(
+  const users = await authRepository.createUser({
     userid,
-    hashed,
+    password: hashed,
     name,
     email,
-    url
-  );
+    url,
+  });
   const token = await createJwtToken(users.id);
   console.log(token);
   if (users) {
@@ -37,7 +37,7 @@ export async function signup(req, res, next) {
 
 export async function login(req, res, next) {
   const { userid, password } = req.body;
-  const user = await authRepository.findByUserid(userid);
+  const user = await authRepository.findByUserId(userid);
   if (!user) {
     res.status(401).json(`${userid} 아이디를 찾을 수 없음`);
   }

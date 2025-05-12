@@ -12,7 +12,7 @@ export async function getPosts(req, res, next) {
 // id를 받아 하나의 포스트를 가져오는 함수
 export async function getPost(req, res, next) {
   const id = req.params.id;
-  const post = await postRepository.getById(id);
+  const post = await postRepository.getByid(id);
   if (post) {
     res.status(200).json(post);
   } else {
@@ -31,11 +31,11 @@ export async function createPost(req, res, next) {
 export async function updatePost(req, res, next) {
   const id = req.params.id;
   const text = req.body.text;
-  const post = await postRepository.getById(id);
+  const post = await postRepository.getByid(id);
   if (!post) {
     return res.status(404).json({ message: `${id}의 포스트가 없습니다.` });
   }
-  if (post.useridx !== req.id) {
+  if (post.userId !== req.id) {
     return res.sendStatus(403);
   }
   const updated = await postRepository.update(id, text);
@@ -45,11 +45,11 @@ export async function updatePost(req, res, next) {
 // 포스트를 삭제하는 함수
 export async function deletePost(req, res, next) {
   const id = req.params.id;
-  const post = await postRepository.getById(id);
+  const post = await postRepository.getByid(id);
   if (!post) {
     return res.status(404).json({ message: `${id}의 포스트가 없습니다` });
   }
-  if (post.useridx !== req.id) {
+  if (post.userId !== req.id) {
     return res.sendStatus(403);
   }
   await postRepository.remove(id);
